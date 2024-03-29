@@ -1,0 +1,38 @@
+﻿# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+# Common IntelliJ Platform excludes
+
+
+**/.idea/*
+
+*.suo
+*.user
+.vs/
+[Bb]in/
+[Oo]bj/
+_UpgradeReport_Files/
+[Pp]ackages/
+
+Thumbs.db
+Desktop.ini
+.DS_Store
+# MS OFFICE
+*.tmp
+
+# Word temporary
+~$*.doc*
+.~lock.*
+# Word Auto Backup File
+Backup of *.doc*
+
+# Node.js modules
+node_modules/
+
+# NuGet packages
+packages/
+
+.vscode/
+
