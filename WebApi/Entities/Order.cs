@@ -5,7 +5,7 @@ public class Order
 
     public Guid Id { get; private set; } = Guid.NewGuid();
 
-    public IEnumerable<Product> Products { get; set; } = Array.Empty<Product>();
+    public IEnumerable<Product> Products { get; set; } = new List<Product>();
 
     public Status Status { get; set; } = Status.NEW;
 }
