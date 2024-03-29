@@ -12,6 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Dtos\" />
       <Folder Include="Filters\" />
     </ItemGroup>
 

@@ -7,21 +7,10 @@ public class RepositoryTests
 {
     private readonly OrderRepository _repository = new ();
     
-    [Fact]
-    public void AddsOrder()
+     private static void SetupOrders()
     {
-        var orders = SetupOrders();
-        var order = new Order();
-        _repository.Add(order);
-        
-        Assert.Single(orders);
-    }
-
-    private static Array SetupOrders()
-    {
-        var orders = FakeDb.Orders as Array;
-        Array.Clear(orders);
-        return orders;
+        var orders = FakeDb.Orders as List<Order>;
+        orders.Clear();
     }
 
     [Fact]
@@ -61,5 +50,16 @@ public class RepositoryTests
 
         Assert.Single(order.Products);
         Assert.Equal(product.Id, order.Products.First().Id);
+    }
+
+    [Fact]
+    public void AddsOrder()
+    {
+        SetupOrders();
+        var order = new Order();
+        _repository.Add(order);
+        var result = FakeDb.Orders.FirstOrDefault();
+        
+        Assert.NotNull(result);
     }
 }

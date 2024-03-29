@@ -32,5 +32,5 @@ public static class FakeDb
         }
     };
 
-    public static IEnumerable<Order> Orders { get; set; } = Array.Empty<Order>();
+    public static IEnumerable<Order> Orders { get; set; } = new List<Order>();
 }
