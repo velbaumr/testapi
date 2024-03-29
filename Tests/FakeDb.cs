@@ -1,6 +1,6 @@
 ﻿using WebApi.Entities;
 
-namespace WebApi.DataAccess;
+namespace Tests;
 
 public static class FakeDb
 {
