@@ -9,7 +9,7 @@ public class RepositoryTests
     
      private static void SetupOrders()
     {
-        var orders = FakeDb.Orders as List<Order>;
+        var orders = (List<Order>)FakeDb.Orders;
         orders.Clear();
     }
 
@@ -45,7 +45,7 @@ public class RepositoryTests
         var product = FakeDb.Products.First();
         var order = new Order();
         _repository.Add(order);
-        (order.Products as List<Product>).Add(product);
+        ((List<Product>)order.Products).Add(product);
         _repository.Update(order);
 
         Assert.Single(order.Products);

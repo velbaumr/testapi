@@ -2,5 +2,6 @@
 
 public enum Status
 {
-    NEW
+    NEW,
+    PAID
 }
