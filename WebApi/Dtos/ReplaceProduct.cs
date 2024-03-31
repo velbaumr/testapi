@@ -1,4 +1,6 @@
-﻿namespace WebApi.Dtos
+﻿using WebApi.Entities;
+
+namespace WebApi.Dtos
 {
     public class ReplaceProduct
     {

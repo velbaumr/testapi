@@ -1,4 +1,6 @@
-﻿namespace WebApi.Dtos
+﻿using System.Text.Json.Serialization;
+
+namespace WebApi.Dtos
 {
     public class QuantityChange
     {

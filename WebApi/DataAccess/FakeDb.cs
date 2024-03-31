@@ -4,8 +4,8 @@ namespace WebApi.DataAccess;
 
 public static class FakeDb
 {
-    public static IEnumerable<Product> Products => new[]
-    {
+    public static IEnumerable<Product> Products =>
+    [
         new Product
         {
             Id = 123,
@@ -30,7 +30,7 @@ public static class FakeDb
             Name = "75'' OLED TV",
             Price = 1333.37M
         }
-    };
+    ];
 
     public static IEnumerable<Order> Orders { get; set; } = new List<Order>();
 }
