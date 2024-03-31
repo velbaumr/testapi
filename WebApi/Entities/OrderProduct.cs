@@ -12,6 +12,6 @@
 
         public int Quantity { get; set; }
 
-        public ReplacementProduct? Replaced_with { get; set; }
+        public OrderProduct? Replaced_with { get; set; }
     }
 }

@@ -43,13 +43,17 @@ public class RepositoryTests
     {
         SetupOrders();
         var product = FakeDb.Products.First();
+        var orderProduct = new OrderProduct
+        {
+            Product_id = product.Id
+        };
         var order = new Order();
         _repository.Add(order);
-        ((List<Product>)order.Products).Add(product);
+        ((List<OrderProduct>)order.Products).Add(orderProduct);
         _repository.Update(order);
 
         Assert.Single(order.Products);
-        Assert.Equal(product.Id, order.Products.First().Id);
+        Assert.Equal(product.Id, order.Products.First().Product_id);
     }
 
     [Fact]

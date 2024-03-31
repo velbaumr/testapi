@@ -27,7 +27,7 @@ public static class FakeDb
         new Product
         {
             Id = 999,
-            Name = "75'' OLED TV",
+            Name = "75\" OLED TV",
             Price = 1333.37M
         }
     ];

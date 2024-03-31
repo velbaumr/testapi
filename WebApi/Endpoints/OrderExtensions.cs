@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
 using WebApi.DataAccess;
 using WebApi.Dtos;
 using WebApi.Entities;
@@ -39,11 +38,11 @@ public static class OrderExtensions
         app.MapPost("/api/orders/{orderId}/products", (IOrderRepository repository, Guid orderId, [FromBody] IEnumerable<int> data) =>
         {
         });
-        app.MapPatch("/api/orders/{orderId}/products/{productId}", (IOrderRepository repository, Guid orderId, Guid productId, [FromBody] OrderProduct data) =>
+        app.MapPatch("/api/orders/{orderId}/products/{productId}", (IOrderRepository repository, Guid orderId, Guid productId, [FromBody] OrderProductDto data) =>
         {
             return Results.NotFound("Not found");
         });
-        app.MapPatch("/api/orders/{orderId}", (IOrderRepository repository, Guid orderId, [FromBody] Order data) =>
+        app.MapPatch("/api/orders/{orderId}", (IOrderRepository repository, Guid orderId, [FromBody] OrderDto data) =>
         {
             
         });
