@@ -4,7 +4,7 @@ namespace WebApi.Dtos
 {
     public class OrderProductDto
     {
-        public int? Amount { get; set; }
+        public int? Quantity { get; set; }
 
         public ReplacementProduct? ReplacementProduct { get; set; }
     }

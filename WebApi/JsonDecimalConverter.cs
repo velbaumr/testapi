@@ -11,7 +11,7 @@ namespace WebApi
        Type typeToConvert,
        JsonSerializerOptions options)
         {
-            string stringValue = reader.GetString();
+            var stringValue = reader.GetString();
             return string.IsNullOrWhiteSpace(stringValue)
                 ? default
                 : decimal.Parse(stringValue, CultureInfo.InvariantCulture);
@@ -22,7 +22,7 @@ namespace WebApi
             decimal value,
             JsonSerializerOptions options)
         {
-            string numberAsString = value.ToString("F2", CultureInfo.InvariantCulture);
+            var numberAsString = value.ToString("F2", CultureInfo.InvariantCulture);
             writer.WriteStringValue(numberAsString);
         }
     }
