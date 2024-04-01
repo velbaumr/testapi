@@ -39,6 +39,51 @@ namespace Tests
       
             },
         };
+        
+        private readonly Order _selfReplacementToTest = new()
+        {
+            Products = new List<OrderProduct>
+            {
+                new()
+                {
+                    Quantity = 2,
+                    Price = 0.45M,
+                    Replaced_with = new OrderProduct()
+                    {
+                        Quantity = 8,
+                        Price = 0.45M
+                    }
+                }
+      
+            },
+        };
+        
+        private readonly Order _mixedReplacementToTest = new()
+        {
+            Products = new List<OrderProduct>
+            {
+                new()
+                {
+                    Quantity = 3,
+                    Price = 0.45M,
+                },
+                new()
+                {
+                    Quantity = 3,
+                    Price = 1333.37M,
+                },
+                new()
+                {
+                    Quantity = 3,
+                    Price = 0.42M,
+                    Replaced_with = new OrderProduct()
+                    {
+                        Quantity = 20,
+                        Price = 0.42M
+                    }
+                }
+            },
+        };
 
         
         [Fact]
@@ -56,6 +101,26 @@ namespace Tests
             
             Assert.Equal(0.90M, order.Amount.Total);
             Assert.Equal(13.08M, order.Amount.Discount);
+            Assert.Equal(0.00M, order.Amount.Return);
+        }
+        
+        [Fact]
+        public void CalculatesSelfReplacedAmounts()
+        {
+            var order = AmountCalculator.CalculateReplacementAmounts(_selfReplacementToTest);
+            
+            Assert.Equal(0.90M, order.Amount.Total);
+            Assert.Equal(2.70M, order.Amount.Discount);
+            Assert.Equal(0.00M, order.Amount.Return);
+        }
+        
+        [Fact]
+        public void CalculatesMixedReplacedAmounts()
+        {
+            var order = AmountCalculator.CalculateReplacementAmounts(_mixedReplacementToTest);
+            
+            Assert.Equal(4002.72M, order.Amount.Total);
+            Assert.Equal(7.14M, order.Amount.Discount);
             Assert.Equal(0.00M, order.Amount.Return);
         }
     }

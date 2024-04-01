@@ -43,12 +43,12 @@ public static class OrderExtensions
 
             if (order == null || product == null)
             {
-                return Results.NotFound();
+                return Results.NotFound("Not found");
             }
 
             if (data.Quantity == null && data.ReplacementProduct == null)
             {
-                return Results.BadRequest();
+                return Results.BadRequest("Invalid parameters");
             }
 
             return data.Quantity.HasValue ? ChangeProductQuantity(product, data, order) : ReplaceProduct(order, data, product);
@@ -79,7 +79,7 @@ public static class OrderExtensions
             return Results.NotFound("Not found");
         }
 
-        if (((List<int>)data).GroupBy(x => x).Any(g => g.Count() > 1))
+        if (((List<int>)data).GroupBy(x => x).Any(g => g.Count() > 1) || ((List<int>)data).Except(FakeDb.Products.Select(x => x.Id)).Any())
         {
             return Results.BadRequest("Invalid parameters");
         }
@@ -100,7 +100,7 @@ public static class OrderExtensions
         var replacement = FakeDb.Products.SingleOrDefault(x => x.Id == data.ReplacementProduct!.Product_id);
         if (replacement == null)
         {
-            return Results.NotFound();
+            return Results.NotFound("Not found");
         }
 
         product.Replaced_with = new OrderProduct
@@ -118,14 +118,19 @@ public static class OrderExtensions
 
     private static IResult ChangeOrderStatus(IOrderRepository repository, Guid orderId, OrderDto data)
     {
+        
         var order = repository.GetById(orderId);
 
         if (order == null)
         {
-            return Results.NotFound();
+            return Results.NotFound("Not found");
         }
 
-        if (!Enum.TryParse<Status>(data.Status, out var status)) return Results.BadRequest();
+        if (!Enum.TryParse<Status>(data.Status, out var status)) return Results.BadRequest("Invalid order status");
+        if (status != Status.PAID)
+        {
+            return Results.BadRequest("Invalid order status");
+        }
         order.Status = status;
         order.Amount.Paid = order.Amount.Total;
 
