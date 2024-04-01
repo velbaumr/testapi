@@ -71,6 +71,11 @@ namespace Tests
                 {
                     Quantity = 3,
                     Price = 1333.37M,
+                    Replaced_with = new OrderProduct()
+                    {
+                        Quantity = 30,
+                        Price = 0.45M
+                    }
                 },
                 new()
                 {
@@ -119,9 +124,9 @@ namespace Tests
         {
             var order = AmountCalculator.CalculateReplacementAmounts(_mixedReplacementToTest);
             
-            Assert.Equal(4002.72M, order.Amount.Total);
-            Assert.Equal(7.14M, order.Amount.Discount);
-            Assert.Equal(0.00M, order.Amount.Return);
+            Assert.Equal(23.25M, order.Amount.Total);
+            Assert.Equal(0.00M, order.Amount.Discount);
+            Assert.Equal(3979.47M, order.Amount.Return);
         }
     }
 }
