@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Filters
 {
@@ -7,15 +6,10 @@ namespace WebApi.Filters
     {
         public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
         {
-            var problemDetails = new ProblemDetails
-            {
-                Title = "Bad request"
-            };
-
             httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
 
             await httpContext.Response
-                .WriteAsJsonAsync(problemDetails, cancellationToken);
+                .WriteAsJsonAsync(new { Errors = new { Detail = "Bad Request"}}, cancellationToken);
 
             return true;
         }

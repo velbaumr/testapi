@@ -32,7 +32,7 @@ namespace WebApi
                 .Sum(x => x.Quantity * x.Price);
             
             order.Amount.Paid = total;
-            order.Amount.Return = total > replacementTotals - selfReplacements + notReplaced
+            order.Amount.Return = total > replacementTotals - selfReplacements - notReplaced
                 ? total - replacementTotals - selfReplacements - notReplaced
                 : 0;
             order.Amount.Discount = total < replacementTotals - selfReplacements + notReplaced
