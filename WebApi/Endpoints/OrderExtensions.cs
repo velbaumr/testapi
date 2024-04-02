@@ -46,7 +46,7 @@ public static class OrderExtensions
                 return Results.NotFound("Not found");
             }
 
-            if (data.Quantity == null && data.ReplacementProduct == null)
+            if (data.Quantity == null && data.Replaced_with == null)
             {
                 return Results.BadRequest("Invalid parameters");
             }
@@ -97,7 +97,7 @@ public static class OrderExtensions
             return Results.BadRequest("Invalid parameters");
         }
 
-        var replacement = FakeDb.Products.SingleOrDefault(x => x.Id == data.ReplacementProduct!.Product_id);
+        var replacement = FakeDb.Products.SingleOrDefault(x => x.Id == data.Replaced_with!.Product_id);
         if (replacement == null)
         {
             return Results.NotFound("Not found");
@@ -109,7 +109,7 @@ public static class OrderExtensions
             Name = replacement.Name,
             Price = replacement.Price,
             Product_id = replacement.Id,
-            Quantity = data.ReplacementProduct!.Quantity
+            Quantity = data.Replaced_with!.Quantity
         };
 
         AmountCalculator.CalculateReplacementAmounts(order);

@@ -6,7 +6,7 @@ namespace WebApi.Dtos
     {
         public int? Quantity { get; set; }
 
-        public ReplacementProduct? ReplacementProduct { get; set; }
+        public ReplacementProduct? Replaced_with { get; set; }
     }
 
     public class ReplacementProduct
